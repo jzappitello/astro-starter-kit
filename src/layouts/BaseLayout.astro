@@ -40,29 +40,80 @@ const { title, description } = Astro.props;
       const moonIcon = document.getElementById("moon-icon");
       const sunIcon = document.getElementById("sun-icon");
 
+      const toggleIcons = (showSun: boolean) => {
+        if (showSun) {
+          requestAnimationFrame(() => {
+            moonIcon.style.opacity = "0";
+            setTimeout(() => {
+              moonIcon.classList.add("hidden");
+              sunIcon.classList.remove("hidden");
+            }, 300);
+            sunIcon.style.opacity = "1";
+          });
+        } else {
+          requestAnimationFrame(() => {
+            sunIcon.style.opacity = "0";
+            setTimeout(() => {
+              sunIcon.classList.add("hidden");
+              moonIcon.classList.remove("hidden");
+            }, 300);
+            moonIcon.style.opacity = "1";
+          });
+        }
+      };
+
       if (localStorage.getItem("dark-mode") === "enabled") {
         document.documentElement.classList.add("dark");
         darkModeCheckbox.checked = true;
+        moonIcon.classList.add("hidden");
+        sunIcon.classList.remove("hidden");
+        sunIcon.style.opacity = "1";
       }
 
       if (darkModeCheckbox) {
         darkModeCheckbox.addEventListener("change", (event) => {
-          moonIcon.classList.toggle("hidden");
-          sunIcon.classList.toggle("hidden");
           const target = event.target as HTMLInputElement;
+
           if (target.checked) {
             document.documentElement.classList.add("dark");
             localStorage.setItem("dark-mode", "enabled");
-            moonIcon.classList.add("hidden");
-            sunIcon.classList.remove("hidden");
+            toggleIcons(true);
           } else {
             document.documentElement.classList.remove("dark");
             localStorage.setItem("dark-mode", "disabled");
-            moonIcon.classList.remove("hidden");
-            sunIcon.classList.add("hidden");
+            toggleIcons(false);
           }
         });
       }
+      //   const darkModeCheckbox = document.getElementById(
+      //     "dark-mode"
+      //   ) as HTMLInputElement;
+      //   const moonIcon = document.getElementById("moon-icon");
+      //   const sunIcon = document.getElementById("sun-icon");
+
+      //   if (localStorage.getItem("dark-mode") === "enabled") {
+      //     document.documentElement.classList.add("dark");
+      //     darkModeCheckbox.checked = true;
+      //   }
+
+      //   if (darkModeCheckbox) {
+      //     darkModeCheckbox.addEventListener("change", (event) => {
+      //       moonIcon.classList.toggle("hidden");
+      //       sunIcon.classList.toggle("hidden");
+      //       const target = event.target as HTMLInputElement;
+      //       if (target.checked) {
+      //         document.documentElement.classList.add("dark");
+      //         localStorage.setItem("dark-mode", "enabled");
+      //         moonIcon.classList.add("hidden");
+      //         sunIcon.classList.remove("hidden");
+      //       } else {
+      //         document.documentElement.classList.remove("dark");
+      //         localStorage.setItem("dark-mode", "disabled");
+      //         moonIcon.classList.remove("hidden");
+      //         sunIcon.classList.add("hidden");
+      //       }
+      //     });
+      //   }
     </script>
     <script>
       declare global {
