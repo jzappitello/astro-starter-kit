@@ -24,7 +24,7 @@ const { title, description } = Astro.props;
     />
     <title>{title ?? "Astro Starter Kit"}</title>
   </head>
-  <body class="font-mono dark:bg-slate-900 dark:text-slate-100">
+  <body class="dark:bg-slate-800 dark:text-slate-100">
     <Header />
     <h1
       class="pb-4 font-sans text-5xl font-bold uppercase leading-tight md:text-6xl"
@@ -37,6 +37,8 @@ const { title, description } = Astro.props;
       const darkModeCheckbox = document.getElementById(
         "dark-mode"
       ) as HTMLInputElement;
+      const moonIcon = document.getElementById("moon-icon");
+      const sunIcon = document.getElementById("sun-icon");
 
       if (localStorage.getItem("dark-mode") === "enabled") {
         document.documentElement.classList.add("dark");
@@ -45,13 +47,19 @@ const { title, description } = Astro.props;
 
       if (darkModeCheckbox) {
         darkModeCheckbox.addEventListener("change", (event) => {
+          moonIcon.classList.toggle("hidden");
+          sunIcon.classList.toggle("hidden");
           const target = event.target as HTMLInputElement;
           if (target.checked) {
             document.documentElement.classList.add("dark");
             localStorage.setItem("dark-mode", "enabled");
+            moonIcon.classList.add("hidden");
+            sunIcon.classList.remove("hidden");
           } else {
             document.documentElement.classList.remove("dark");
             localStorage.setItem("dark-mode", "disabled");
+            moonIcon.classList.remove("hidden");
+            sunIcon.classList.add("hidden");
           }
         });
       }

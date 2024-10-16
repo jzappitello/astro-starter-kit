@@ -3,19 +3,104 @@ import NavLink from "./ui/navLink.astro";
 ---
 
 <header class="flex justify-center">
-  <nav class="flex gap-8 min-w-[343px]">
+  <nav class="w-full">
     <div
-      class="nav-links flex justify-between w-full md:justify-center md:static md:bg-transparent"
+      class="flex items-center justify-between max-w-5xl px-4 py-3 bg-white shadow-md dark:bg-slate-900 dark:text-slate-100"
     >
-      <NavLink href="/" title="Home" />
-      <NavLink href="/about/" title="About Us" />
-      <NavLink href="/projects/" title="Projects" />
-      <NavLink href="/reviews/" title="Reviews" />
-      <NavLink href="/blog/" title="Blog" />
-      <NavLink href="/contact/" title="Contact" />
-    </div>
-    <div class="h-full flex items-center">
-      <input type="checkbox" id="dark-mode" class="w-6 h-6" />
+      <!-- Logo -->
+      <div class="flex items-center">
+        <img
+          src="https://res.cloudinary.com/dbr4il6bz/image/upload/v1729037825/astro-logo-dark_slke5l.png"
+          alt="Astro Logo"
+          class="h-8 w-auto"
+        />
+      </div>
+      <!-- Mobile menu button -->
+      <div class="flex items-center justify-center gap-4">
+        <button id="mobile-menu-button" class="md:hidden">
+          <svg
+            class="w-6 h-6"
+            fill="none"
+            stroke="currentColor"
+            viewBox="0 0 24 24"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M4 6h16M4 12h16M4 18h16"></path>
+          </svg>
+        </button>
+        <!-- Navigation links -->
+        <div
+          id="nav-links"
+          class="hidden md:flex md:items-end md:justify-end md:space-x-4"
+        >
+          <NavLink href="/" title="Home" />
+          <NavLink href="/about/" title="About Us" />
+          <NavLink href="/projects/" title="Projects" />
+          <NavLink href="/reviews/" title="Reviews" />
+          <NavLink href="/blog/" title="Blog" />
+          <NavLink href="/contact/" title="Contact" />
+        </div>
+        <!-- Dark mode toggle -->
+        <div class="flex items-center">
+          <input type="checkbox" id="dark-mode" class="hidden" />
+          <label for="dark-mode" class="cursor-pointer">
+            <svg
+              id="moon-icon"
+              class="w-6 h-6 text-gray-800 dark:text-white transition-opacity duration-300"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"
+              ></path>
+            </svg>
+            <svg
+              id="sun-icon"
+              class="w-6 h-6 text-gray-800 dark:text-white hidden transition-opacity duration-300"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"
+              ></path>
+            </svg>
+          </label>
+        </div>
+      </div>
     </div>
   </nav>
+
+  <script>
+    const mobileMenuButton = document.getElementById("mobile-menu-button");
+    const navLinks = document.getElementById("nav-links");
+
+    mobileMenuButton.addEventListener("click", () => {
+      navLinks.classList.toggle("hidden");
+      navLinks.classList.toggle("flex");
+      navLinks.classList.toggle("flex-col");
+      navLinks.classList.toggle("absolute");
+      navLinks.classList.toggle("top-16");
+      navLinks.classList.toggle("left-0");
+      navLinks.classList.toggle("right-0");
+      navLinks.classList.toggle("bg-white");
+      navLinks.classList.toggle("dark:bg-gray-800");
+      navLinks.classList.toggle("shadow-md");
+      navLinks.classList.toggle("p-4");
+      navLinks.classList.toggle("space-y-2");
+    });
+  </script>
 </header>
