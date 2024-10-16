@@ -1,0 +1,53 @@
+---
+// import Header from '../components/header.astro';
+// import Footer from '../components/footer.astro';
+
+type Props = {
+  title?: string;
+  description?: string;
+};
+const { title, description } = Astro.props;
+---
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <link rel="icon" type="image/svg+xml" href="/favicon-32x32.png" />
+    <meta name="viewport" content="width=device-width" />
+    <meta name="generator" content={Astro.generator} />
+    <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"
+    ></script>
+    <meta
+      name="description"
+      content={description ??
+        "Discover the ultimate starter kit for integrating Astro with DecapCMS. This comprehensive guide provides step-by-step instructions, best practices, and essential resources to help you build fast, dynamic websites with ease. Perfect for developers looking to enhance their projects with modern tools and seamless content management."}
+    />
+    <title>{title ?? "Astro Starter Kit"}</title>
+  </head>
+  <body class="font-mono">
+    <!-- <Header /> -->
+    <h1
+      class="pb-4 font-sans text-5xl font-bold uppercase leading-tight md:text-6xl"
+    >
+      {title}
+    </h1>
+    <slot />
+    <!-- <Footer /> -->
+    <script>
+      declare global {
+        interface Window {
+          netlifyIdentity: any;
+        }
+      }
+      if (window.netlifyIdentity) {
+        window.netlifyIdentity.on("init", (user: any) => {
+          if (!user) {
+            window.netlifyIdentity.on("login", () => {
+              document.location.href = "/admin/";
+            });
+          }
+        });
+      }
+    </script>
+  </body>
+</html>

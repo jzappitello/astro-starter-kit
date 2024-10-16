@@ -1,34 +1,11 @@
 ---
-
+import BaseLayout from "../layouts/BaseLayout.astro";
+const title = "Astro Starter Kit";
+const description = "Astro Starter Kit Description";
 ---
 
-<html lang="en">
-  <head>
-    <meta charset="utf-8" />
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-    <meta name="viewport" content="width=device-width" />
-    <meta name="generator" content={Astro.generator} />
-    <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"
-    ></script>
-    <title>Astro</title>
-  </head>
-  <body>
-    <h1>Astro</h1>
-    <script>
-      declare global {
-        interface Window {
-          netlifyIdentity: any;
-        }
-      }
-      if (window.netlifyIdentity) {
-        window.netlifyIdentity.on("init", (user: any) => {
-          if (!user) {
-            window.netlifyIdentity.on("login", () => {
-              document.location.href = "/admin/";
-            });
-          }
-        });
-      }
-    </script>
-  </body>
-</html>
+<BaseLayout title={title} description={description}>
+  <h2 class="pb-4 font-sans text-3xl font-bold leading-tight md:text-4xl">
+    This is the start of the Astro Starter Kit using DecapCMS and Tailwind.
+  </h2>
+</BaseLayout>
