@@ -1,0 +1,21 @@
+---
+import NavLink from "./ui/navLink.astro";
+---
+
+<header class="flex justify-center">
+  <nav class="flex gap-8 min-w-[343px]">
+    <div
+      class="nav-links flex justify-between w-full md:justify-center md:static md:bg-transparent"
+    >
+      <NavLink href="/" title="Home" />
+      <NavLink href="/about/" title="About Us" />
+      <NavLink href="/projects/" title="Projects" />
+      <NavLink href="/reviews/" title="Reviews" />
+      <NavLink href="/blog/" title="Blog" />
+      <NavLink href="/contact/" title="Contact" />
+    </div>
+    <div class="h-full flex items-center">
+      <input type="checkbox" id="dark-mode" class="w-6 h-6" />
+    </div>
+  </nav>
+</header>
